@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Rajdhani:wght@600;700&display=swap');
+
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────────── */
+:root {
+  --clr-black:    #000000;
+  --clr-white:    #FFFFFF;
+  --clr-cyan:     #00CFB5;
+  --clr-cyan-rgb: 0, 207, 181;
+  --clr-cyan-dim: #00876E;
+  --clr-magenta:  #FF00FF;
+  --clr-magenta-rgb: 255, 0, 255;
+  --clr-magenta-dim: #AA00AA;
+  --clr-dark:     #090909;
+  --clr-dark2:    #111111;
+  --clr-gray:     #1A1A1A;
+  --font-impact:  'Bebas Neue', 'Archivo Black', Impact, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-ui:      'Rajdhani', sans-serif;
+  --skew:         -10deg;
+  --skew-block:   skewX(-10deg);
+}
+
+/* Teto theme — applied via JS on <html data-theme="teto"> */
+[data-theme="teto"] {
+  --clr-cyan:        #E60026;
+  --clr-cyan-rgb:    230, 0, 38;
+  --clr-cyan-dim:    #8B0000;
+  --clr-magenta:     #FF8C00;
+  --clr-magenta-rgb: 255, 140, 0;
+  --clr-magenta-dim: #AA5500;
+}
+
+/* Smooth color transition when theme switches — scoped to avoid GSAP conflicts */
+:root, body, section, div, span, button, h1, h2, h3, p, a, li, ul, nav {
+  transition:
+    color 0.4s ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+/* ─────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--clr-black);
+  color: var(--clr-white);
+  font-family: var(--font-ui);
+  cursor: none;
+  overflow-x: hidden;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────
+   SCROLLBAR
+───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--clr-black); }
+::-webkit-scrollbar-thumb { background: var(--clr-cyan); }
+
+/* ─────────────────────────────────────────────
+   SELECTION
+───────────────────────────────────────────── */
+::selection {
+  background: var(--clr-cyan);
+  color: var(--clr-black);
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY CLASSES
+───────────────────────────────────────────── */
+.font-impact { font-family: var(--font-impact); }
+.font-mono   { font-family: var(--font-mono); }
+.font-ui     { font-family: var(--font-ui); }
+.skew        { transform: skewX(var(--skew)); }
+.text-cyan   { color: var(--clr-cyan); }
+.text-magenta { color: var(--clr-magenta); }
+
+/* ─────────────────────────────────────────────
+   GLITCH ANIMATION
+───────────────────────────────────────────── */
+@keyframes glitch {
+  0%   { clip-path: inset(40% 0 61% 0); transform: translate(-4px,0); }
+  20%  { clip-path: inset(92% 0 1% 0);  transform: translate(4px,0); }
+  40%  { clip-path: inset(43% 0 1% 0);  transform: translate(-2px,0); }
+  60%  { clip-path: inset(25% 0 58% 0); transform: translate(0,0); }
+  80%  { clip-path: inset(54% 0 7% 0);  transform: translate(3px,0); }
+  100% { clip-path: inset(58% 0 43% 0); transform: translate(-4px,0); }
+}
+
+@keyframes glitch2 {
+  0%   { clip-path: inset(50% 0 20% 0); transform: translate(4px,0); }
+  25%  { clip-path: inset(10% 0 80% 0); transform: translate(-4px,0); }
+  50%  { clip-path: inset(70% 0 5% 0);  transform: translate(0); }
+  75%  { clip-path: inset(2% 0 88% 0);  transform: translate(2px,0); }
+  100% { clip-path: inset(50% 0 20% 0); transform: translate(-4px,0); }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes flicker {
+  0%, 99% { opacity: 1; }
+  50% { opacity: 0.92; }
+  51% { opacity: 0.95; }
+}
+
+@keyframes pulse-cyan {
+  0%, 100% { box-shadow: 0 0 8px var(--clr-cyan), 0 0 20px var(--clr-cyan); }
+  50%       { box-shadow: 0 0 20px var(--clr-cyan), 0 0 60px var(--clr-cyan); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* ─────────────────────────────────────────────
+   GLITCH TEXT
+───────────────────────────────────────────── */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.glitch-text::before {
+  color: var(--clr-cyan);
+  animation: glitch 2.5s infinite linear alternate-reverse;
+  opacity: 0.7;
+}
+
+.glitch-text::after {
+  color: var(--clr-magenta);
+  animation: glitch2 3s infinite linear alternate-reverse;
+  opacity: 0.7;
+}
+
+/* ─────────────────────────────────────────────
+   SCANLINES OVERLAY
+───────────────────────────────────────────── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 4px
+  );
+  z-index: 999;
+}
+
+/* ─────────────────────────────────────────────
+   TRAPEZE FRAME
+───────────────────────────────────────────── */
+.trapeze {
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+}
+
+.trapeze-reverse {
+  clip-path: polygon(0% 0%, calc(100% - 12px) 0%, 100% 100%, 12px 100%);
+}
+
+/* ─────────────────────────────────────────────
+   DIAGONAL CUT
+───────────────────────────────────────────── */
+.diagonal-cut-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.diagonal-cut-top {
+  clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* ─────────────────────────────────────────────
+   CYBER BORDER
+───────────────────────────────────────────── */
+.cyber-border {
+  border: 1px solid var(--clr-cyan);
+  box-shadow: 0 0 8px rgba(var(--clr-cyan-rgb), 0.4), inset 0 0 8px rgba(var(--clr-cyan-rgb), 0.1);
+}
+
+.cyber-border-magenta {
+  border: 1px solid var(--clr-magenta);
+  box-shadow: 0 0 8px rgba(var(--clr-magenta-rgb), 0.4), inset 0 0 8px rgba(var(--clr-magenta-rgb), 0.1);
+}
+
+/* ─────────────────────────────────────────────
+   SECTIONS
+───────────────────────────────────────────── */
+section {
+  position: relative;
+  overflow: hidden;
+}

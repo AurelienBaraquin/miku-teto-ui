@@ -1,0 +1,104 @@
+.transitionOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  /* Color changes dynamically via JS */
+  background: var(--clr-cyan);
+  clip-path: circle(0% at 50% 50%);
+}
+
+.transitionOverlay[data-theme-next="teto"] {
+  background: radial-gradient(circle, #E60026 0%, #8B0000 100%);
+}
+
+.transitionOverlay[data-theme-next="miku"] {
+  background: radial-gradient(circle, #00CFB5 0%, #004A3D 100%);
+}
+
+/* ─── BUTTON ──────────────────────────────────── */
+.btn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.75);
+  border: 2px solid var(--clr-cyan);
+  padding: 10px 14px 10px 10px;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 16px rgba(0, 207, 181, 0.3),
+    inset 0 0 12px rgba(0, 207, 181, 0.05);
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.btn:hover {
+  box-shadow:
+    0 0 28px rgba(0, 207, 181, 0.6),
+    inset 0 0 20px rgba(0, 207, 181, 0.1);
+}
+
+[data-theme="teto"] .btn {
+  border-color: var(--clr-cyan);
+  box-shadow:
+    0 0 16px rgba(230, 0, 38, 0.35),
+    inset 0 0 12px rgba(230, 0, 38, 0.06);
+}
+
+/* ─── GIF ─────────────────────────────────────── */
+.gif {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  display: block;
+  image-rendering: auto;
+}
+
+/* ─── LABEL ───────────────────────────────────── */
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.labelCurrent {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: line-through;
+  text-decoration-color: var(--clr-cyan);
+}
+
+.labelArrow {
+  color: var(--clr-cyan);
+  font-size: 10px;
+}
+
+.labelNext {
+  color: var(--clr-cyan);
+  font-weight: 700;
+}
+
+/* ─── PULSE RING ──────────────────────────────── */
+.ring {
+  position: absolute;
+  inset: -6px;
+  border: 1px solid var(--clr-cyan);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  opacity: 0;
+  animation: ringPulse 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.04); }
+}

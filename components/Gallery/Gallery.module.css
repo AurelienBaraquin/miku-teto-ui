@@ -1,0 +1,386 @@
+.gallery {
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
+  padding: 120px 5vw;
+  overflow: hidden;
+}
+
+.gallery::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 0, 255, 0.03) 50%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.gallery::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--clr-magenta), var(--clr-cyan));
+}
+
+/* ─── BG ACCENT ───────────────────────────────── */
+.bgAccent {
+  position: absolute;
+  left: -100px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-family: var(--font-impact);
+  font-size: 200px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 0, 255, 0.04);
+  letter-spacing: 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── HEADER ──────────────────────────────────── */
+.header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 60px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.labelBar {
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--clr-magenta);
+}
+
+.labelText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--clr-magenta);
+}
+
+.sectionTitle {
+  font-family: var(--font-impact);
+  line-height: 0.85;
+  transform: skewX(-10deg);
+  display: inline-block;
+}
+
+.titleLine {
+  font-size: clamp(60px, 9vw, 120px);
+  color: var(--clr-white);
+  display: block;
+  letter-spacing: 4px;
+}
+
+.titleLineSub {
+  font-size: clamp(40px, 6vw, 80px);
+  color: transparent;
+  -webkit-text-stroke: 2px var(--clr-magenta);
+  display: block;
+  letter-spacing: 8px;
+  filter: drop-shadow(0 0 16px var(--clr-magenta));
+}
+
+/* ─── CONTROLS ────────────────────────────────── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.controlBtn {
+  background: none;
+  border: 2px solid var(--clr-cyan);
+  color: var(--clr-cyan);
+  width: 44px;
+  height: 44px;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  cursor: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.controlBtn:hover:not(:disabled) {
+  background: var(--clr-cyan);
+  color: var(--clr-black);
+}
+
+.controlBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.controlCount {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+}
+
+/* ─── SLIDER ──────────────────────────────────── */
+.slider {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 40px 20px 60px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+
+.slider::-webkit-scrollbar { display: none; }
+
+.sliderDragging {
+  cursor: grabbing;
+}
+
+.cardWrapper {
+  flex: 0 0 280px;
+  scroll-snap-align: center;
+}
+
+/* ─── CARD ────────────────────────────────────── */
+.card {
+  width: 280px;
+  height: 380px;
+  position: relative;
+  background: var(--clr-dark2);
+  border: 1px solid rgba(255,255,255,0.1);
+  transform: rotate(var(--card-rotation));
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease,
+    border-color 0.2s ease;
+  overflow: visible;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.card:hover {
+  transform: rotate(0deg) translateY(-20px) scale(1.05);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.6),
+    0 0 30px var(--card-accent, rgba(0, 207, 181, 0.3));
+  border-color: var(--card-accent, var(--clr-cyan));
+  z-index: 10;
+}
+
+.cardActive {
+  transform: rotate(0deg) translateY(-10px) scale(1.02) !important;
+  border-color: var(--clr-cyan) !important;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.5),
+    0 0 40px rgba(0, 207, 181, 0.4) !important;
+}
+
+/* ─── CARD BG ─────────────────────────────────── */
+.cardBg {
+  position: absolute;
+  inset: 0;
+  background: var(--card-color, #111);
+  opacity: 0.15;
+}
+
+/* ─── COVER ART ───────────────────────────────── */
+.coverArt {
+  position: relative;
+  height: 65%;
+  background: linear-gradient(
+    135deg,
+    var(--card-color, #333) 0%,
+    transparent 100%
+  );
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coverPattern {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.03) 10px,
+    rgba(255,255,255,0.03) 11px
+  );
+}
+
+.coverNum {
+  font-family: var(--font-impact);
+  font-size: 80px;
+  color: rgba(255,255,255,0.1);
+  line-height: 1;
+  z-index: 1;
+}
+
+.playIcon {
+  position: absolute;
+  font-size: 40px;
+  color: var(--clr-white);
+  opacity: 0.9;
+  z-index: 2;
+  text-shadow: 0 0 20px var(--card-accent, var(--clr-cyan));
+  animation: pulse-cyan 0.8s infinite;
+}
+
+/* ─── CARD INFO ────────────────────────────────── */
+.cardInfo {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.cardYear {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--card-accent, var(--clr-cyan));
+}
+
+.cardTitle {
+  font-family: var(--font-impact);
+  font-size: 22px;
+  color: var(--clr-white);
+  letter-spacing: 2px;
+  transform: skewX(-5deg);
+  display: inline-block;
+}
+
+.cardArtist {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 600;
+}
+
+.audioReady {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--clr-cyan);
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+.audioMissing {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+/* ─── CORNER CUT DECO ─────────────────────────── */
+.cornerCut {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--card-color, var(--clr-black));
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  z-index: 3;
+}
+
+/* ─── CARD GLOW ────────────────────────────────── */
+.cardGlow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse, rgba(0, 207, 181, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── ACTIVE BAR ──────────────────────────────── */
+.activeBar {
+  position: relative;
+  z-index: 2;
+  margin-top: -20px;
+  padding: 0 20px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.activeBarInner {
+  background: rgba(0, 207, 181, 0.1);
+  border: 1px solid var(--clr-cyan);
+  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.activeBarLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(0, 207, 181, 0.6);
+}
+
+.activeBarTitle {
+  font-family: var(--font-impact);
+  font-size: 20px;
+  color: var(--clr-white);
+  letter-spacing: 2px;
+}
+
+.activeBarYear {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--clr-cyan);
+  letter-spacing: 2px;
+}
+
+/* ─── INSTRUCTIONS ────────────────────────────── */
+.instructions {
+  margin-top: 32px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 24px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.2);
+  flex-wrap: wrap;
+}

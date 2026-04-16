@@ -1,0 +1,323 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1;
+  padding: 0 5vw;
+}
+
+/* ─── BACKGROUND SLASHES ─────────────────────── */
+.bgSlash {
+  position: absolute;
+  width: 200%;
+  height: 120%;
+  top: -10%;
+  left: -30%;
+  background: linear-gradient(
+    135deg,
+    transparent 40%,
+    rgba(0, 207, 181, 0.04) 40%,
+    rgba(0, 207, 181, 0.04) 55%,
+    transparent 55%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bgSlash2 {
+  position: absolute;
+  width: 200%;
+  height: 120%;
+  top: -10%;
+  left: -20%;
+  background: linear-gradient(
+    135deg,
+    transparent 55%,
+    rgba(255, 0, 255, 0.03) 55%,
+    rgba(255, 0, 255, 0.03) 65%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── CONTENT ────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  flex: 1;
+}
+
+/* ─── SYS LABEL ─────────────────────────────── */
+.sysLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--clr-cyan);
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.sysLabelDot {
+  width: 6px;
+  height: 6px;
+  background: var(--clr-cyan);
+  animation: pulse-cyan 1.5s infinite;
+  display: inline-block;
+}
+
+/* ─── TITLE ─────────────────────────────────── */
+.title {
+  font-family: var(--font-impact);
+  line-height: 0.85;
+  margin-bottom: 32px;
+  transform: skewX(-10deg);
+  display: inline-block;
+}
+
+.titleMain {
+  font-size: clamp(100px, 18vw, 220px);
+  color: var(--clr-white);
+  display: block;
+  letter-spacing: -4px;
+  text-shadow:
+    4px 4px 0 var(--clr-black),
+    -1px -1px 0 rgba(0, 207, 181, 0.3);
+}
+
+.titleSub {
+  font-size: clamp(48px, 9vw, 110px);
+  color: var(--clr-cyan);
+  display: block;
+  letter-spacing: 8px;
+  -webkit-text-stroke: 2px var(--clr-cyan);
+  color: transparent;
+  filter: drop-shadow(0 0 20px var(--clr-cyan));
+}
+
+/* ─── SUBTITLE BLOCK ─────────────────────────── */
+.subtitleBlock {
+  margin-bottom: 40px;
+}
+
+.subtitleInner {
+  background: var(--clr-cyan);
+  display: inline-block;
+  padding: 8px 32px 8px 16px;
+}
+
+.subtitleText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--clr-black);
+  font-weight: 700;
+}
+
+/* ─── CTA ────────────────────────────────────── */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--clr-black);
+  border: 2px solid var(--clr-magenta);
+  color: var(--clr-magenta);
+  padding: 16px 40px;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 100%, 16px 100%);
+  cursor: none;
+  transition: background 0.15s, box-shadow 0.3s;
+  margin-bottom: 48px;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+}
+
+.cta:hover {
+  background: var(--clr-magenta);
+  color: var(--clr-black);
+  box-shadow: 0 0 40px rgba(255, 0, 255, 0.6);
+}
+
+.cta:hover .ctaArrow {
+  transform: translateX(6px);
+}
+
+.ctaText {
+  font-family: var(--font-impact);
+  font-size: 20px;
+  letter-spacing: 4px;
+}
+
+.ctaArrow {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+/* ─── STATS ROW ──────────────────────────────── */
+.statsRow {
+  display: flex;
+  gap: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px;
+  border-left: 2px solid rgba(0, 207, 181, 0.3);
+  gap: 4px;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(0, 207, 181, 0.6);
+}
+
+.statValue {
+  font-family: var(--font-impact);
+  font-size: 18px;
+  color: var(--clr-white);
+  letter-spacing: 1px;
+}
+
+/* ─── MIKU GIF ───────────────────────────────── */
+.mikuContainer {
+  position: absolute;
+  right: 5%;
+  bottom: 0;
+  width: clamp(280px, 35vw, 500px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.mikuGlow {
+  position: absolute;
+  width: 60%;
+  height: 50%;
+  bottom: 0;
+  background: radial-gradient(ellipse, rgba(0, 207, 181, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(30px);
+}
+
+.mikuGif {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(0, 207, 181, 0.5));
+}
+
+.mikuFrame {
+  width: 100%;
+  background: rgba(0, 207, 181, 0.1);
+  border: 1px solid var(--clr-cyan);
+  border-top: none;
+  padding: 6px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.mikuFrameLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--clr-cyan);
+}
+
+/* ─── STICKER FLOAT ──────────────────────────── */
+.stickerFloat {
+  position: absolute;
+  top: 15%;
+  right: 38%;
+  animation: float 3s ease-in-out infinite;
+  animation-delay: -1.5s;
+  z-index: 3;
+}
+
+.sticker {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(0, 207, 181, 0.6));
+}
+
+/* ─── SCROLL INDICATOR ───────────────────────── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 3;
+}
+
+.scrollText {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.4);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scanline 2s ease-in-out infinite;
+}
+
+/* ─── CORNER LABELS ──────────────────────────── */
+.cornerTL {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.2);
+  z-index: 3;
+}
+
+.cornerBR {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(0, 207, 181, 0.4);
+  z-index: 3;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    padding-top: 120px;
+    justify-content: flex-start;
+  }
+
+  .mikuContainer {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  .stickerFloat {
+    display: none;
+  }
+
+  .titleMain { font-size: 80px; }
+  .titleSub { font-size: 40px; }
+}

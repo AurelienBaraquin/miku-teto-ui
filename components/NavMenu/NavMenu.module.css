@@ -1,0 +1,237 @@
+.trigger {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 9999;
+  background: var(--clr-black);
+  border: 2px solid var(--clr-cyan);
+  color: var(--clr-cyan);
+  padding: 10px 16px 10px 12px;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 0 100%);
+  cursor: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  transition: background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 0 10px rgba(0, 207, 181, 0.3);
+}
+
+.trigger:hover {
+  background: var(--clr-cyan);
+  box-shadow: 0 0 30px rgba(0, 207, 181, 0.8);
+}
+
+.trigger:hover .triggerBar {
+  background: var(--clr-black);
+}
+
+.trigger:hover .triggerLabel {
+  color: var(--clr-black);
+}
+
+.triggerBar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--clr-cyan);
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.15s;
+}
+
+.triggerOpen .triggerBar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.triggerOpen .triggerBar:nth-child(2) {
+  opacity: 0;
+}
+.triggerOpen .triggerBar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.triggerLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--clr-cyan);
+  transition: color 0.15s;
+  margin-top: 2px;
+}
+
+/* ─── OVERLAY ───────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--clr-black);
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 60px;
+  /* Initial state handled by GSAP */
+  clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
+  pointer-events: none;
+}
+
+.overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    rgba(0, 207, 181, 0.02) 20px,
+    rgba(0, 207, 181, 0.02) 21px
+  );
+  pointer-events: none;
+}
+
+.overlay::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(to bottom, var(--clr-cyan), var(--clr-magenta));
+}
+
+/* ─── CORNER DECO ────────────────────────────── */
+.cornerDeco {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.cornerText {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(0, 207, 181, 0.4);
+  text-transform: uppercase;
+}
+
+/* ─── NAV ─────────────────────────────────────── */
+.nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 20px;
+}
+
+.item {
+  /* JS-animated */
+}
+
+.link {
+  background: none;
+  border: none;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 24px;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 100%, 0 100%);
+  transition: background 0.15s;
+}
+
+.link:hover {
+  background: var(--clr-cyan);
+}
+
+.link:hover .linkNum,
+.link:hover .linkText,
+.link:hover .linkArrow {
+  color: var(--clr-black);
+}
+
+.linkNum {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--clr-cyan);
+  transition: color 0.15s;
+  min-width: 28px;
+}
+
+.linkText {
+  font-family: var(--font-impact);
+  font-size: clamp(48px, 7vw, 90px);
+  color: var(--clr-white);
+  letter-spacing: 4px;
+  transform: skewX(-10deg);
+  display: inline-block;
+  transition: color 0.15s, transform 0.15s;
+  line-height: 1;
+}
+
+.link:hover .linkText {
+  transform: skewX(-10deg) scale(1.02);
+}
+
+.linkArrow {
+  font-size: 18px;
+  color: var(--clr-cyan);
+  transition: color 0.15s, transform 0.15s;
+}
+
+.link:hover .linkArrow {
+  transform: translateX(8px);
+}
+
+/* ─── CLOSE ─────────────────────────────── */
+.close {
+  position: absolute;
+  bottom: 32px;
+  right: 40px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 4px;
+  padding: 8px 20px;
+  cursor: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.close:hover {
+  border-color: var(--clr-magenta);
+  color: var(--clr-magenta);
+}
+
+/* ─── BOTTOM DECO ────────────────────────── */
+.bottomDeco {
+  position: absolute;
+  bottom: 32px;
+  left: 60px;
+}
+
+.statusLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--clr-cyan);
+  animation: pulse-cyan 1.5s infinite;
+}
+
+.statusText {
+  color: var(--clr-cyan);
+}

@@ -1,0 +1,29 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 99999;
+  transition: transform 0.08s ease;
+  mix-blend-mode: difference;
+}
+
+.follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  z-index: 99998;
+  border: 2px solid var(--clr-cyan);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 8px var(--clr-cyan);
+}
+
+.cross {
+  display: none;
+}
